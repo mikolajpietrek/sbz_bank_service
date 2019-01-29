@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}History{% endblock %}
+
+{% block content %}
+    <h2>Historia przelewów</h2>
+    {% if user.is_authenticated %}
+       <form>
+            {% csrf_token %}
+            <div style="overflow-x:auto;"><table class="w3-table w3-border w3-bordered w3-white">
+                <tr>
+                    <th>Odbiorca</th>
+                    <th>Tytuł</th>
+                    <th>Kwota</th>
+                </tr>
+                {% for t in transfers %}
+                    <tr>
+                        <td>{{ t.receiver }}</td>
+                        <td>{{ t.title }}</td>
+                        <td>{{ t.amount }}</td>
+                    </tr>
+                {% endfor %}
+            </table></div>
+        </form>
+    {% else %}
+        <p>Please <a href={% url 'login' %}>log in</a> first</p>
+    {% endif %}
+
+{% endblock %}

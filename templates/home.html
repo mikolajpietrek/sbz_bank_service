@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Twój Wspaniały Bank{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p><a class="w3-button w3-block w3-teal" href="{% url 'transfer' %}">Wykonaj przelew</a></p>
+  <p><a class="w3-button w3-block w3-teal" href="{% url 'history' %}">Historia przelewów</a></p>
+  <p><a class="w3-button w3-block w3-teal" href="{% url 'password_change' %}">Zmień hasło</a></p>
+  <p><a class="w3-button w3-block w3-teal" href="{% url 'logout' %}">Wyloguj</a></p>
+{% else %}
+  <p>Nie jesteś zalogowany!</p>
+  <p><a class="w3-button w3-block w3-teal" href="{% url 'login' %}">Zaloguj</a></p>
+  <p><a class="w3-button w3-block w3-teal" href="{% url 'signup' %}">Nowe konto</a></p>
+  <p><a class="w3-button w3-block w3-teal" href="{% url 'password_reset' %}">Zresetuj hasło</a></p>
+{% endif %}
+{% endblock %}  <p><a href="{% url 'home' %}" >Powrót do strony głównej</a>

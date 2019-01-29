@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}SBZ - przelew{% endblock %}
+
+{% block content %}
+<h2>Transfer</h2>
+
+{% if user.is_authenticated %}
+
+{{ form.non_field_errors}}
+<form method="post">
+	{% load widget_tweaks %}
+	{% csrf_token %}
+	<p class="fieldWrapper">
+		{{ form.receiver.errors }}
+		<label for="{{ form.receiver.id_for_label }}">Odbiorca:</label>
+		{{ form.receiver | attr:"class:w3-input w3-border"}}
+	</p>
+	<p class="fieldWrapper">
+		{{ form.title.errors }}
+		<label for="{{ form.title.id_for_label }}">Tytułem:</label>
+		{{ form.title | attr:"class:w3-input w3-border"}}
+	</p>
+	<p class="fieldWrapper">
+		{{ form.amount.errors }}
+		<label for="{{ form.amount.id_for_label }}">Kwota: </label>
+		{{ form.amount | attr:"class:w3-input w3-border" }}
+	</p>
+	<button id="transfer_button" class="w3-button w3-block w3-teal">Akceptuj</button>
+</form>
+
+{% else %}
+	<p>Wymagane jest <a href="{% url 'login' %}">zalogowanie</a>.</p>
+{% endif %}
+
+{% endblock %}

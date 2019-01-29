@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}SBZ - potwierdzenie przelewu{% endblock %}
+
+{% block content %}
+
+<h2>Potwierdzenie przelewu</h2>
+
+{% if user.is_authenticated %}
+<form method="post">
+	{% load widget_tweaks %}
+	{% csrf_token %}
+	<div style="overflow-x:auto;"><table class="w3-table w3-border w3-bordered w3-white">
+		<tr>
+			<th>Odbiorca</th>
+			<th>Tytuł</th>
+			<th>Kwota</th>
+		</tr>
+		{% for t in transfers %}
+			<tr>
+				<td>{{ t.receiver}}</td>
+				<td>{{ t.title}}</td>
+				<td>{{ t.amount}}</td>
+			</tr>
+		{% endfor %}
+	</table></div>
+	<button class="w3-button w3-block w3-teal">Akceptuj</button>
+</form>
+{% else %}
+	<p>Wymagane jest <a href="{% url 'login' %}">zalogowanie</a>.</p>
+{% endif %}
+
+{% endblock %}

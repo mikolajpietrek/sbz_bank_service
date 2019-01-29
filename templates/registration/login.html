@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Logowanie</h2>
+
+{{ form.non_field_errors }}
+<form method="post">
+	{% load widget_tweaks %}
+	{% csrf_token %}
+	<p class="fieldWrapper">
+		{{ form.username.errors }}
+		<label for="{{ form.username.id_for_label }}">Nazwa użytkownika:</label>
+		{{ form.username | attr:"class:w3-input w3-border"}}
+	</p>
+	<p class="fieldWrapper">
+		{{ form.password.errors }}
+		<label for="{{ form.password.id_for_label }}">Hasło: </label>
+		{{ form.password | attr:"class:w3-input w3-border" }}
+	</p>
+	<button class="w3-button w3-block w3-teal">Akceptuj</button>
+</form>
+
+
+
+{% endblock %}
